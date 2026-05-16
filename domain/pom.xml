@@ -8,6 +8,7 @@
     </parent>
     <artifactId>domain</artifactId>
     <name>domain</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
