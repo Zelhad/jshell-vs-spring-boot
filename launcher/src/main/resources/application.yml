@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+
+  application:
+    name: vendti
+  datasource:
+    url: jdbc:postgresql://localhost:5433/vendtidb
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -1,6 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vendti</groupId>
+    <artifactId>ms-vendti</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+
+
+
  <parent>
      <groupId>org.springframework.boot</groupId>
      <artifactId>spring-boot-starter-parent</artifactId>
@@ -8,38 +18,57 @@
      <relativePath/>
  </parent>
 
-  <groupId>com.vendti</groupId>
-  <artifactId>hexmaven</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-    <packaging>pom</packaging>
-
-
-
-
-    <name> hexmaven</name>
     <modules>
         <module>domain</module>
+        <module>application</module>
+        <module>infrastructure</module>
+        <module>launcher</module>
     </modules>
+
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>21</java.version>
+        <jacoco.version>0.8.12</jacoco.version>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.token>squ_41e03b2cd65a43dac03334e602761c156f5e8ee0</sonar.token>
+        <sonar.projectKey>com.vendti:ms-vendti</sonar.projectKey>
+        <sonar.projectName>vendti-backend</sonar.projectName>
+        <sonar.java.source>21</sonar.java.source>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <!-- SonarQube admin password: ZouhairElhadraoui@1 -->
+        <!-- Start: C:\sonarqube-26.5.0.122743\sonarqube-26.5.0.122743\bin\windows-x86-64\StartSonar.bat -->
+        <!-- Run: mvn clean verify sonar:sonar -->
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.vendti</groupId>
-            <artifactId>domain</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.4.12</version>
-        </dependency>
-
-    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,144 @@
+openapi: 3.0.2
+info:
+  title:       Swagger Vendti - OpenAPI 3.0
+  description: API of vendti what will communicate with client side
+  version:     1.0.0
+servers:
+  - description: DEV
+    url: http://localhost:8080
+  - description: QA
+    url: http://localhost:8080
+tags:
+  - name: products
+    description: API for products management
+paths:
+  '/products/{id}':
+    delete:
+
+      deprecated: true
+      tags:
+        - products
+      summary:     Delete a product by ID
+      description: This endpoint allows you to delete a product by its unique identifier.
+      operationId: deleteProductById
+      parameters:
+        - name: id
+          in:          path
+          description: The unique identifier of the product to delete
+          required:    true
+          schema:
+            type:        integer
+            format:      int64
+            description: The ID of the product to delete
+            example:     1
+      responses:
+        '204':
+          description: No Content - Product successfully deleted
+        '404':
+          description: Product not found
+        '500':
+          description: Internal server error
+    get:
+      tags:
+        - products
+      summary:     Get a product by ID
+      description: This endpoint allows you to retrieve a product by its unique identifier.
+      operationId: getProductById
+      parameters:
+        - name: id
+          in:          path
+          description: The unique identifier of the product to retrieve
+          required:    true
+          schema:
+            type:        integer
+            format:      int64
+            description: The ID of the product to retrieve
+            example:     1
+      responses:
+        '200':
+          description: OK - Product found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+        '404':
+          description: Product not found
+        '500':
+          description: Internal server error
+
+  '/products':
+    post:
+      tags:
+        - products
+      summary:     Create a new product
+      description: This endpoint allows you to create a new product by providing the necessary details in the request body.
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Created - Product successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad request - Invalid input
+        '500':
+          description: Internal server error
+    get:
+        tags:
+        - products
+        summary: Get all products
+        description: This endpoint allows you to retrieve a list of all products.
+        operationId: getAllProducts
+        responses:
+          '200':
+            description: OK - List of products retrieved successfully
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+
+components:
+  schemas:
+
+    Product:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type:        integer
+          format:      int64
+          readOnly:    true
+
+          description: Auto-Generated ID
+          example:     1
+        name:
+          type:        string
+          minLength: 1
+          maxLength: 255
+          nullable: false
+          description: The name of the product
+          example:     "Laptop"
+        description:
+          type:        string
+          maxLength: 255
+          description: The description of the product
+          example:     "A high-performance laptop for professional use"
+        href:
+          type:        string
+          description: The URL to the product's image
+          example:     "https://example.com/images/laptop.jpg"
+        isBundle:
+          type:        boolean
+          description: Indicates if the product is a bundle
+          example:     false

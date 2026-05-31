@@ -3,20 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vendti</groupId>
-        <artifactId>hexmaven</artifactId>
+        <artifactId>ms-vendti</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <artifactId>domain</artifactId>
     <name>domain</name>
-    <packaging>jar</packaging>
+
 
     <dependencies>
-        <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.46</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
